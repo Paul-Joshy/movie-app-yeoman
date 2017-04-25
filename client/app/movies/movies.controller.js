@@ -32,7 +32,7 @@ class MoviesComponent {
       this.$http.post('/api/movies', {
         Title: this.movieData.Title,
         Year: this.movieData.Year,
-        Genre: this.movieData.Runtime,
+        Genre: this.movieData.Genre,
         Plot: this.movieData.Plot,
         Actors: this.movieData.Actors,
         Director: this.movieData.Director,
