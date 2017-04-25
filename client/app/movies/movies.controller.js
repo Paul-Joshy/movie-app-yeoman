@@ -31,10 +31,20 @@ class MoviesComponent {
   addMovie() {
       this.$http.post('/api/movies', {
         Title: this.movieData.Title,
-        Plot: this.movieData.Plot
+        Year: this.movieData.Year,
+        Genre: this.movieData.Runtime,
+        Plot: this.movieData.Plot,
+        Actors: this.movieData.Actors,
+        Director: this.movieData.Director,
+        Runtime: this.movieData.Runtime
       });
       this.newMovie = '';
-      // getMovies();
+
+      // this.$http.get('/api/movies').then(response => {
+      //   this.movies = response.data;
+      //   console.log(this.movies);
+      //   // this.socket.syncUpdates('thing', this.awesomeThings);
+      // });
   }
 
   deleteMovie(movie) {
@@ -42,6 +52,13 @@ class MoviesComponent {
     this.$http.delete('/api/movies/' + movie._id).then(response => {
       console.log(response);
     });
+
+    // this.$http.get('/api/movies')
+    // .then(response => {
+    //   this.movies = response.data;
+    //   console.log(this.movies);
+    //   // this.socket.syncUpdates('thing', this.awesomeThings);
+    // });
   }
 }
 

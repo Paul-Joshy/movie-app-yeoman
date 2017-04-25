@@ -13,7 +13,26 @@
       </div>
       <div class="col-md-8 pull right">
         <h3>{{moviesCtrl.movieData.Title}}</h3>
+        <h4>{{moviesCtrl.movieData.Year}}</h4>
         <p>{{moviesCtrl.movieData.Plot}}</p>
+        <table>
+          <tr>
+            <th>Genre: </td>
+            <td>{{moviesCtrl.movieData.Genre}}</td>
+          </tr>
+          <tr>
+            <th>Director: </td>
+            <td>{{moviesCtrl.movieData.Director}}</td>
+          </tr>
+          <tr>
+            <th>Actors: </td>
+            <td>{{moviesCtrl.movieData.Actors}}</td>
+          </tr>
+          <tr>
+            <th>Runtime:</th>
+            <td>{{moviesCtrl.movieData.Runtime}}</th>
+          </tr>
+        </table>
         <button type="button" class="btn btn-default" ng-click="moviesCtrl.addMovie()">Add Movie</button>
       </div>
     </div>
@@ -22,12 +41,14 @@
     <table>
       <tr>
         <th>Title</th>
-        <th>Plot</th>
+        <th>Genre</th>
+        <th>Runtime</th>
         <th>functions</th>
       </tr>
       <tr ng-repeat="movie in moviesCtrl.movies">
         <td>{{movie.Title}}</td>
-        <td>{{movie.Plot}}</td>
+        <td>{{movie.Genre}}</td>
+        <td>{{movie.Runtime}}</td>
         <td><button type="button" class="btn btn-danger" ng-click="moviesCtrl.deleteMovie(movie)">X</button></td>
       </tr>
     </table>
