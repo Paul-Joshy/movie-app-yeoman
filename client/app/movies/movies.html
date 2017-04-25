@@ -1,0 +1,36 @@
+<div class="container">
+
+  <h1>Movies</h1>
+  <input type="text" name="" value="" placeholder="search movie title" ng-model="moviesCtrl.search.title">
+  <input type="text" name="" value="" placeholder="search movie year" ng-model="moviesCtrl.search.year">
+  <button type="button" name="button" class="btn btn-primary" ng-click="moviesCtrl.searchMovies()">Search Movie</button>
+
+  <div class="container">
+    <h2>Movie details</h2>
+    <div class="row">
+      <div class="col-md-4 pull left">
+        <img src="{{moviesCtrl.movieData.Poster}}" alt="{{moviesCtrl.movieData.Title}}">
+      </div>
+      <div class="col-md-8 pull right">
+        <h3>{{moviesCtrl.movieData.Title}}</h3>
+        <p>{{moviesCtrl.movieData.Plot}}</p>
+        <button type="button" class="btn btn-default" ng-click="moviesCtrl.addMovie()">Add Movie</button>
+      </div>
+    </div>
+
+    <h2>Available movies</h2>
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Plot</th>
+        <th>functions</th>
+      </tr>
+      <tr ng-repeat="movie in moviesCtrl.movies">
+        <td>{{movie.Title}}</td>
+        <td>{{movie.Plot}}</td>
+        <td><button type="button" class="btn btn-danger" ng-click="moviesCtrl.deleteMovie(movie)">X</button></td>
+      </tr>
+    </table>
+
+  </div>
+</div>
