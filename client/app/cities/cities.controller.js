@@ -22,12 +22,14 @@ class CitiesComponent {
       this.$http.post('/api/cities/', {
         name:this.name
       });
+      location.reload();
     }
 
   deleteCity(city) {
     this.$http.delete('/api/cities/' + city._id).then(response => {
       console.log(response);
     });
+    location.reload();
   }
 
   updateCity(city) {

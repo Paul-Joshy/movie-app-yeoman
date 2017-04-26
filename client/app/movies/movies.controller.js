@@ -3,9 +3,10 @@
 (function(){
 
 class MoviesComponent {
-  constructor($http) {
+  constructor($http, $scope, socket) {
     // this.message = 'Hello';
     this.$http = $http;
+    this.socket = socket;
     this.movieData = [];
   }
 
@@ -14,7 +15,7 @@ class MoviesComponent {
     .then(response => {
       this.movies = response.data;
       console.log(this.movies);
-      // this.socket.syncUpdates('thing', this.awesomeThings);
+      this.socket.syncUpdates('movie', this.movies);
     });
   }
 
@@ -24,7 +25,7 @@ class MoviesComponent {
       .then(response => {
         this.movieData = response.data;
         console.log(this.movieData);
-        // this.socket.syncUpdates('thing', this.awesomeThings);
+        this.socket.syncUpdates('movie', this.movieData);
       });
   }
 
