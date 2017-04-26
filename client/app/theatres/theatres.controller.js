@@ -8,6 +8,7 @@ class TheatresComponent {
     this.$http = $http;
     this.socket = socket;
     this.theatres = [];
+    this.enableUpdate = false
   }
 
   $onInit(){
@@ -15,6 +16,16 @@ class TheatresComponent {
       this.theatres = response.data;
       console.log(this.theatres);
       this.socket.syncUpdates('theatre', this.theatres);
+    });
+  }
+
+  getTheatres(theatre){
+    // console.log('sdfd');
+    this.enableUpdate = false;
+    this.$http.get('/api/theatres/').then(response =>{
+      this.theatres = response.data;
+      console.log(this.theatres);
+      // this.socket.syncUpdates('theatre', this.theatres);
     });
   }
 
@@ -33,6 +44,17 @@ class TheatresComponent {
     this.$http.delete('api/theatres/' + theatre._id).then(response => {
       console.log(response);
     });
+  }
+
+  saveTheatre(theatre){
+    this.$http.put('api/theatres/' + theatre._id, {
+      name: theatre.name,
+      location: theatre.location,
+      screenCount: theatre.screenCount,
+      seatCount: theatre.seatCount
+    }).then(response => {
+      console.log(response);
+    })
   }
 }
 

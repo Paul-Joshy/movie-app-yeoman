@@ -1,0 +1,7 @@
+input{
+  border: none;
+}
+
+input:active{
+  border: 1px solid black;
+}

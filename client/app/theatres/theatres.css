@@ -1,0 +1,7 @@
+.table-inputs{
+  border: none;
+}
+
+.table-inputs:active{
+  border: 1px solid black;
+}

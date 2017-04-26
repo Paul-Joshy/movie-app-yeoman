@@ -17,11 +17,14 @@
     </tr>
 
     <tr ng-repeat="theatre in theatresCtrl.theatres">
-      <td>{{theatre.name}}</td>
-      <td>{{theatre.location}}</td>
-      <td>{{theatre.seatCount}}</td>
-      <td>{{theatre.screenCount}}</td>
-      <td><button class="btn btn-danger" type="button" name="button" ng-click="theatresCtrl.deleteTheatre(theatre)">X</button></td>
+      <td><input type="text" name="" class="table-inputs" value="{{theatre.name}}" ng-model="theatre.name" ng-click="enableUpdate = true" ng-blur="theatresCtrl.getTheatres(theatre)"></td>
+      <td><input type="text" name="" class="table-inputs" value="{{theatre.location}}" ng-model="theatre.location" ng-click="enableUpdate = true" ng-blur="theatresCtrl.getTheatres(theatre)"></td>
+      <td><input type="text" name="" class="table-inputs" value="{{theatre.seatCount}}" ng-model="theatre.seatCount" ng-click="enableUpdate = true" ng-blur="theatresCtrl.getTheatres(theatre)"></td>
+      <td><input type="text" name="" class="table-inputs" value="{{theatre.screenCount}}" ng-model="theatre.screenCount" ng-click="enableUpdate = true" ng-blur="theatresCtrl.getTheatres(theatre)"></td>
+      <td>
+        <button class="btn btn-danger" type="button" name="button" ng-click="theatresCtrl.deleteTheatre(theatre)">X</button>
+        <button id="update-button" ng-disabled="!enableUpdate" class="btn btn-warning"type="button" name="button" ng-mousedown="theatresCtrl.saveTheatre(theatre)">Update</button>
+      </td>
     </tr>
   </table>
 </div>

@@ -38,3 +38,10 @@
   padding: 0.2em 0;
 }
 
+.table-inputs{
+  border: none;
+}
+
+.table-inputs:active{
+  border: 1px solid black;
+}
