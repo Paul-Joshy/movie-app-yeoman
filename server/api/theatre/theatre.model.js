@@ -4,6 +4,7 @@ import mongoose from 'mongoose';
 
 var TheatreSchema = new mongoose.Schema({
   name: String,
+  city: String,
   location: String,
   screenCount: Number,
   seatCount: Number,

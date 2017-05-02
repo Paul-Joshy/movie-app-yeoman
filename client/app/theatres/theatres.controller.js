@@ -12,6 +12,12 @@ class TheatresComponent {
   }
 
   $onInit(){
+    this.$http.get('/api/cities').then(response =>{
+      this.cities = response.data;
+      console.log(this.cities);
+      this.socket.syncUpdates('city', this.cities);
+    });
+
     this.$http.get('/api/theatres').then(response =>{
       this.theatres = response.data;
       console.log(this.theatres);
@@ -32,6 +38,7 @@ class TheatresComponent {
   addTheatre(){
     this.$http.post('api/theatres',{
       name: this.theatre.name,
+      city: this.theatre.city,
       location: this.theatre.location,
       screenCount: this.theatre.screenCount,
       seatCount: this.theatre.seatCount
@@ -49,6 +56,7 @@ class TheatresComponent {
   saveTheatre(theatre){
     this.$http.put('api/theatres/' + theatre._id, {
       name: theatre.name,
+      city: theatre.city,
       location: theatre.location,
       screenCount: theatre.screenCount,
       seatCount: theatre.seatCount

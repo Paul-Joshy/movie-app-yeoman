@@ -1,5 +1,12 @@
 <div class="container">
   <h2>THEATRES</h2>
+
+  <div class="form-group">
+    <label for="sel1">Select City</label>
+    <select class="form-control" id="sel1" ng-model="theatresCtrl.theatre.city" >
+      <option ng-repeat="city in theatresCtrl.cities">{{ city.name }}</option>
+    </select>
+
   <table class="table">
     <tr>
       <th>Name</th>

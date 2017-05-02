@@ -1,0 +1,38 @@
+<div class="container">
+  <h1>Theatre Mapping</h1>
+  <form>
+    <!-- {{theatreMappingCtrl.movies}} -->
+    <div class="form-group">
+      <label for="sel1">Select City:</label>
+      <select class="form-control" id="sel1" ng-model="theatreMappingCtrl.theatreForm.city">
+        <option ng-repeat="city in theatreMappingCtrl.cities">{{ city.name }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="sel1">Select Theatre:</label>
+      <select class="form-control" id="sel1" ng-model="theatreMappingCtrl.theatreForm.theatre" >
+        <option ng-repeat="theatre in theatreMappingCtrl.theatres">{{ theatre.name }} - {{theatre.location}}</option>
+      </select>
+    </div>
+  <div class="form-group">
+    <label for="sel1">Select Movie:</label>
+    <select class="form-control" id="sel1" ng-model="theatreMappingCtrl.theatreForm.movie">
+      <option ng-repeat="movie in theatreMappingCtrl.movies">{{ movie.Title }}</option>
+    </select>
+  </div>
+  <div class="row">
+    <div>
+      <h3>Add dates</h3>
+      <input type="date" name="" value="" ng-model="theatreMappingCtrl.date">
+      <button type="button" name="button" class="btn btn-submit" ng-click="addDate()">Add Date</button>
+    </div>
+    <div>
+        <h3>Add Timings</h3>
+        <input type="time" name="" value="" ng-model="theatreMappingCtrl.timing">
+        <button type="button" name="button" class="btn btn-submit" ng-click="addTiming()">Add timing</button>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-default" ng-click="theatreMappingCtrl.save()">Submit</button>
+</form>
+
+</div>
