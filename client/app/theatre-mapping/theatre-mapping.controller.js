@@ -11,6 +11,8 @@ class TheatreMappingComponent {
     this.theatres = [];
     this.cities = [];
     this.mappings = [];
+    // this.theatreForm.dates = [];
+    // this.theatreForm.timings = [];
     // this.enableUpdate = false
   }
 
@@ -41,14 +43,13 @@ class TheatreMappingComponent {
       });
     }
 
-    save(){
+    addMapping(){
+      this.theatreForm.dates = [];
+      this.theatreForm.timings = [];
+      this.theatreForm.dates.push(this.date);
+      this.theatreForm.timings.push(this.timing);
       console.log(this.theatreForm);
-      this.$http.post('api/theatre-mappings',{
-        movie: this.theatreForm.movie,
-        city: this.theatreForm.city,
-        theatre: this.theatreForm.theatre,
-        date: this.theatreForm.date
-      });
+      this.$http.post('api/theatre-mappings',this.theatreForm);
       this.theatreForm = '';
     }
 
