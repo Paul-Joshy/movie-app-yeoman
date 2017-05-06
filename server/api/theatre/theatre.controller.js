@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import Theatre from './theatre.model';
+import TheatreMapping from '../theatre-mapping/theatre-mapping.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -86,17 +87,46 @@ export function update(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  return Theatre.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(saveUpdates(req.body))
-    .then(respondWithResult(res))
-    .catch(handleError(res));
+
+  TheatreMapping.find({theatre: "INOX" + ' - ' + "Khargar"}, function(err, theatreMappings){
+
+    if(err){
+      return err;
+    }
+
+    else if(theatreMappings.length){
+      // res.send(theatreMappings);
+      res.send("Cannot update theatre that contains mappings");
+    }
+
+    else{
+      return Theatre.findById(req.params.id).exec()
+      .then(handleEntityNotFound(res))
+      .then(saveUpdates(req.body))
+      .then(respondWithResult(res))
+      .catch(handleError(res));
+    }
+  })
 }
 
 // Deletes a Theatre from the DB
 export function destroy(req, res) {
-  return Theatre.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+
+  TheatreMapping.find({theatre: "INOX" + ' - ' + "Khargar"}, function(err, theatreMappings){
+
+    if(err){
+      return err;
+    }
+    else if(theatreMappings.length){
+      // res.send(theatreMappings);
+      res.send("Cannot delete theatre that contains mappings");
+    }
+    else{
+      return Theatre.findById(req.params.id).exec()
+      .then(handleEntityNotFound(res))
+      .then(removeEntity(res))
+      .catch(handleError(res));
+    }
+  })
+
 }

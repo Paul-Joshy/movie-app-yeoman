@@ -47,10 +47,10 @@ class TheatresComponent {
   }
 
   deleteTheatre(theatre){
-    console.log(theatre);
-    this.$http.delete('api/theatres/' + theatre._id).then(response => {
-      console.log(response);
-    });
+    console.log("dsfs");
+        this.$http.delete('api/theatres/' + theatre._id).then(response => {
+          console.log(response);
+        });
   }
 
   saveTheatre(theatre){
@@ -62,7 +62,7 @@ class TheatresComponent {
       seatCount: theatre.seatCount
     }).then(response => {
       console.log(response);
-    })
+    });
   }
 }
 
