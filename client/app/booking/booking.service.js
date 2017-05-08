@@ -11,9 +11,12 @@ function bookingService() {
     movieDetails.name = name;
   }
 
-  this.setTimings = function(date, time){
+  this.setDate = function(date){
     movieDetails.date = date;
-    movieDetails.timg = time;
+  }
+
+  this.setTime = function(time){
+    movieDetails.time = time;
   }
 
   this.getDetails = function(){

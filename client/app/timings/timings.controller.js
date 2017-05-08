@@ -3,14 +3,16 @@
 (function(){
 
 class TimingsComponent {
-  constructor($scope, $http, socket, booking) {
+  constructor($scope, $http, socket, booking, $location) {
     this.message = 'Hello';
     this.$scope = $scope;
     this.$http = $http;
     this.socket = socket;
     this.theatreMappings = [];
+    this.filteredMappings = [];
     this.dates = [];
     this.bookingService = booking;
+    this.$location = $location;
   }
 
   $onInit() {
@@ -35,6 +37,18 @@ class TimingsComponent {
       // console.log(this.theatreMappings);
       this.socket.syncUpdates('theatremappings', this.theatreMappings);
     });
+  }
+
+  selectDate(date){
+    // this.timings.date = date;
+    this.filteredMappings = _.filter(this.theatreMappings, function(mapping){ return _.contains(mapping.dates, date)});
+    console.log(this.filteredMappings);
+    // this.$location.path('#theatre-timings');
+  }
+
+  selectTimings(time){
+    this.bookingService.getDetails(this.timings.date, time);
+    this.$location.path('/seating');
   }
 }
 

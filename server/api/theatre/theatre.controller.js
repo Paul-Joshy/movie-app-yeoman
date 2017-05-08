@@ -88,7 +88,7 @@ export function update(req, res) {
     delete req.body._id;
   }
 
-  TheatreMapping.find({theatre: "INOX" + ' - ' + "Khargar"}, function(err, theatreMappings){
+  TheatreMapping.find({theatre: req.body.theatre + ' - ' + req.body.location}, function(err, theatreMappings){
 
     if(err){
       return err;
@@ -96,7 +96,7 @@ export function update(req, res) {
 
     else if(theatreMappings.length){
       // res.send(theatreMappings);
-      res.send("Cannot update theatre that contains mappings");
+      res.send(theatreMappings);
     }
 
     else{
@@ -112,14 +112,14 @@ export function update(req, res) {
 // Deletes a Theatre from the DB
 export function destroy(req, res) {
 
-  TheatreMapping.find({theatre: "INOX" + ' - ' + "Khargar"}, function(err, theatreMappings){
+  TheatreMapping.find({theatre: req.body.theatre + ' - ' + req.body.location}, function(err, theatreMappings){
 
     if(err){
       return err;
     }
     else if(theatreMappings.length){
       // res.send(theatreMappings);
-      res.send("Cannot delete theatre that contains mappings");
+      res.send(theatreMappings);
     }
     else{
       return Theatre.findById(req.params.id).exec()
