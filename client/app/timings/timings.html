@@ -1,0 +1,11 @@
+<div class="">
+  <ul class="nav nav-pills" >
+    <li role="pill" ng-repeat="date in timingsCtrl.dates" data-toggle="tab"><a href="#">{{date}}</a></li>
+  </ul>
+  <table class="table" ng-repeat="mapping in timingsCtrl.theatreMappings">
+    <tr>
+      <td>{{mapping.theatre}}</td>
+      <td ng-repeat="timing in mapping.timings">{{timing}}</td>
+    </tr>
+  </table>
+</div>
