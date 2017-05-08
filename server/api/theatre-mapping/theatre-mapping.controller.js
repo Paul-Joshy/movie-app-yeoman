@@ -74,11 +74,17 @@ export function show(req, res) {
     .catch(handleError(res));
 }
 
+//gets TheatreMappings of a movie from the DB
+// export function getMovie(req, res){
+//   return TheatreMapping.find({ movie: req.params.movie });
+// }
+
 // Creates a new TheatreMapping in the DB
 export function create(req, res) {
   return TheatreMapping.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
+
 }
 
 // Updates an existing TheatreMapping in the DB

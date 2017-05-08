@@ -11,6 +11,7 @@
 
 import _ from 'lodash';
 import Movie from './movie.model';
+import TheatreMapping from '../theatre-mapping/theatre-mapping.model'
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;

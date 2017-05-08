@@ -37,7 +37,8 @@ class MoviesComponent {
         Plot: this.movieData.Plot,
         Actors: this.movieData.Actors,
         Director: this.movieData.Director,
-        Runtime: this.movieData.Runtime
+        Runtime: this.movieData.Runtime,
+        Poster: this.movieData.Poster
       });
       this.newMovie = '';
 
