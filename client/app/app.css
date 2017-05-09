@@ -45,3 +45,31 @@
 .table-inputs:active{
   border: 1px solid black;
 }
+
+.inline{
+  display: inline-block;
+}
+
+.seats{
+  display: block;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  margin: 2px;
+}
+
+.selected{
+  color: white;
+  background-color: blue;
+}
+
+.booked{
+  color: black;
+  background-color: grey;
+}
+
+.ghost{
+  margin:10px;
+}
