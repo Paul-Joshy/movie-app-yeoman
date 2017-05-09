@@ -11,13 +11,14 @@ function bookingService() {
     movieDetails.name = name;
   }
 
-  this.setDate = function(date){
+  this.setTimings = function(date, time){
     movieDetails.date = date;
-  }
-
-  this.setTime = function(time){
     movieDetails.time = time;
   }
+  // 
+  // this.setTime = function(time){
+  //   movieDetails.time = time;
+  // }
 
   this.getDetails = function(){
     return movieDetails;

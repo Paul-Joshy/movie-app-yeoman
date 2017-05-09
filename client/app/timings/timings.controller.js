@@ -13,6 +13,7 @@ class TimingsComponent {
     this.dates = [];
     this.bookingService = booking;
     this.$location = $location;
+    this.timings = {};
   }
 
   $onInit() {
@@ -40,16 +41,20 @@ class TimingsComponent {
   }
 
   selectDate(date){
-    // this.timings.date = date;
+    console.log(date);
+    this.timings.date = date;
     this.filteredMappings = _.filter(this.theatreMappings, function(mapping){ return _.contains(mapping.dates, date)});
     console.log(this.filteredMappings);
     // this.$location.path('#theatre-timings');
   }
 
   selectTimings(time){
-    this.bookingService.getDetails(this.timings.date, time);
+    console.log(this.timings.date, time);
+    this.bookingService.setTimings(this.timings.date, time);
+    console.log(this.bookingService.getDetails());
     this.$location.path('/seating');
   }
+
 }
 
 angular.module('movieApp')

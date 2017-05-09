@@ -3,8 +3,16 @@
 (function(){
 
 class SeatingComponent {
-  constructor() {
+  constructor($scope, $http, socket, booking) {
     this.message = 'Hello';
+    this.$scope = $scope;
+    this.$http = $http;
+    this.bookingService = booking;
+  }
+
+  $onInit(){
+    var movieDetails = this.bookingService.getDetails();
+    console.log(movieDetails);
   }
 }
 

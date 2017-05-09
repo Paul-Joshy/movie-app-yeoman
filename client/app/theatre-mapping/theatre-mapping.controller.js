@@ -126,7 +126,7 @@ class TheatreMappingComponent {
     }
 
     deleteMapping(){
-      console.log(this.mapping._id);
+      console.log(this.mapping);
       this.$http.delete('api/theatre-mappings/' + this.mapping._id);
       this.mapping = {};
     }
