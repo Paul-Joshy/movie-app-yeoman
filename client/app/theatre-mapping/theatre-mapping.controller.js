@@ -53,6 +53,7 @@ class TheatreMappingComponent {
     searchMapping(){
       this.theatreForm.dates = [];
       this.theatreForm.timings = [];
+      console.log(this.mappings);
       this.mapping = _.find(this.mappings, (mapping)=>{ return mapping.city === this.theatreForm.city && mapping.movie === this.theatreForm.movie && mapping.theatre === this.theatreForm.theatre});
       console.log(this.mapping);
       if(this.mapping){
@@ -74,6 +75,9 @@ class TheatreMappingComponent {
     addDate(){
       // console.log(this.theatreForm);
       // this.theatreForm.dates = [];
+      // var Dayname = new Date(this.date).
+
+      this.date = new Date(this.date);
       this.theatreForm.dates.push(this.date);
       console.log(this.theatreForm.dates);
     }
@@ -104,25 +108,20 @@ class TheatreMappingComponent {
     PostOrUpdateMapping(city, theatre, movie){
       console.log('theatre mappings')
       // console.log(this.mapping[0]);
+      // console.log(this.mappings)
       this.mapping = _.find(this.mappings, (mapping)=>{ return mapping.city === this.theatreForm.city && mapping.movie === this.theatreForm.movie && mapping.theatre === this.theatreForm.theatre});
       console.log(this.mapping);
       if(this.mapping){
-        console.log("came here")
-        console.log(this.mapping._id);
-        this.$http.put('api/theatre-mappings/'+this.mapping._id,{
+        console.log("mapping exists");
+        console.log('api/theatre-mappings/' + this.mapping._id);
+        this.$http.put('api/theatre-mappings/'+ this.mapping._id,{
           dates: this.theatreForm.dates,
           timings: this.theatreForm.timings
         })
       }
-      else
+      else{
         this.$http.post('api/theatre-mappings',this.theatreForm);
-
-      // this.$http.put('api/theatre-mappings/'+this.theatreForm.city+'/'+this.theatreForm.theatre+'/'+this.theatreForm.movie,{
-      //   dates: this.theatreForm.dates,
-      //   timings: this.theatreForm.timings
-      // }).then(response =>{
-      //   console.log(response);
-      // })
+      }
     }
 
     deleteMapping(){

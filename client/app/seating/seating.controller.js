@@ -15,14 +15,15 @@ class SeatingComponent {
     this.bookedSeats = [];
     this.bookingForm = {};
     this.$location = $location;
+    this.movieDetails = {};
   }
 
   $onInit(){
-    var movieDetails = this.bookingService.getDetails();
-    console.log(movieDetails);
+    this.movieDetails = this.bookingService.getDetails();
+    console.log(this.movieDetails);
     console.log(this.rows);
     console.log(this.columns);
-    // this.bookedSeats = movieDetails.bookedSeats;
+    // this.bookedSeats = this.movieDetails.bookedSeats;
     console.log(this.bookedSeats);
   }
 
@@ -67,8 +68,8 @@ class SeatingComponent {
     console.log("shoop baby");
     this.bookingService.addSelected(this.selectedSeats, this.bookingForm.grandTotal);
     console.log(this.bookingService.getDetails());
-    var movieDetails = this.bookingService.getDetails();
-    this.bookedSeats = movieDetails.bookedSeats;
+    this.movieDetails = this.bookingService.getDetails();
+    this.bookedSeats = this.movieDetails.bookedSeats;
     this.selectedSeats = [];
     this.$location.path('/payments');
   }
