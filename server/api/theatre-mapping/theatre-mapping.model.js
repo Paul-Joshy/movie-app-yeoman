@@ -6,8 +6,8 @@ var TheatreMappingSchema = new mongoose.Schema({
   movie: String,
   theatre: String,
   city: String,
-  dates: [Date],
-  timings: [Date]
+  dates: [String],
+  timings: [String]
 });
 
 export default mongoose.model('TheatreMapping', TheatreMappingSchema);

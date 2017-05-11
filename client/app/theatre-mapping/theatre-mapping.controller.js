@@ -45,7 +45,7 @@ class TheatreMappingComponent {
       this.$http.get('/api/theatre-mappings').then(response =>{
         this.mappings = response.data;
         console.log(this.mappings);
-        this.socket.syncUpdates('theatreMapping', this.mapppings);
+        // this.socket.syncUpdates('theatreMapping', this.mapppings);
       });
 
       // groupByCity(){
@@ -79,7 +79,10 @@ class TheatreMappingComponent {
     }
 
     addDate(){
-      this.mapping.dates.push(this.theatreForm.date + '');
+      var day = new Date(this.theatreForm.date).getDate();
+      var month = new Date(this.theatreForm.date).getMonth();
+      var year = new Date(this.theatreForm.date).getFullYear();
+      this.mapping.dates.push(`${day}.${month}.${year}`);
       console.log(this.mapping);
     }
 
@@ -88,7 +91,10 @@ class TheatreMappingComponent {
     }
 
     addTiming(){
-      this.mapping.timings.push(this.theatreForm.timing + '')
+      var hours = new Date(this.theatreForm.timing).getHours();
+      var minutes = new Date(this.theatreForm.timing).getMinutes();
+      this.mapping.timings.push(`${hours}.${minutes}`);
+      console.log(this.mapping);
     }
 
     removeTiming(i){
@@ -107,9 +113,10 @@ class TheatreMappingComponent {
           timings: this.mapping.timings
         }).then(response =>{
           console.log(response);
+          console.log(this.mappings);
           this.mappings = _.reject(this.mappings, (map)=>{ return map._id === mapping._id });
           this.mappings.push(response.data);
-          console.log(this.mappings);
+          
         })
       }
       else {

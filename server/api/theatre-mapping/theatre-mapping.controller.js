@@ -92,7 +92,7 @@ export function update(req, res) {
   if (req.body._id) {
     delete req.body._id;
   }
-  return TheatreMapping.findById(req.params.id).exec()
+  return TheatreMapping.findByIdAndUpdate(req.params.id, req.body).exec()
     .then(handleEntityNotFound(res))
     .then(saveUpdates(req.body))
     .then(respondWithResult(res))
