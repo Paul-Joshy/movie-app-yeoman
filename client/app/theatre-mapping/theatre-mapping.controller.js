@@ -7,15 +7,18 @@ class TheatreMappingComponent {
     this.message = 'Hello';
     this.$http = $http;
     this.socket = socket;
+
     this.movies = [];
     this.theatres = [];
     this.cities = [];
     this.mappings = [];
+    this.mapping = {};
+
     this.theatreForm = {};
     this.cityMappings = {};
 
-    this.theatreForm.dates = [];
-    this.theatreForm.timings = [];
+    // this.theatreForm.dates = [];
+    // this.theatreForm.timings = [];
   }
 
     $onInit(){
@@ -24,19 +27,19 @@ class TheatreMappingComponent {
         this.theatres = response.data;
         this.cityMappings = _.groupBy(this.theatres, (theatre)=>{ return theatre.city; });
         console.log(this.theatres);
-        this.socket.syncUpdates('theatre', this.theatres);
+        // this.socket.syncUpdates('theatre', this.theatres);
       });
 
       this.$http.get('/api/movies').then(response =>{
         this.movies = response.data;
         // console.log(this.theatres);
-        this.socket.syncUpdates('movie', this.theatres);
+        // this.socket.syncUpdates('movie', this.theatres);
       });
 
       this.$http.get('/api/cities').then(response =>{
         this.cities = response.data;
         // console.log(this.theatres);
-        this.socket.syncUpdates('city', this.theatres);
+        // this.socket.syncUpdates('city', this.theatres);
       });
 
       this.$http.get('/api/theatre-mappings').then(response =>{
@@ -50,84 +53,90 @@ class TheatreMappingComponent {
 
     }
 
-    searchMapping(){
-      this.theatreForm.dates = [];
-      this.theatreForm.timings = [];
-      console.log(this.mappings);
-      this.mapping = _.find(this.mappings, (mapping)=>{ return mapping.city === this.theatreForm.city && mapping.movie === this.theatreForm.movie && mapping.theatre === this.theatreForm.theatre});
-      console.log(this.mapping);
-      if(this.mapping){
-        this.theatreForm.dates = this.mapping.dates;
-        this.theatreForm.timings = this.mapping.timings;
+    addMapping(){
+      if(this.searchMapping())
+      {
+        this.mapping = this.searchMapping()
+        console.log(this.searchMapping());
+        console.log("mapping exists");
       }
+      else {
+        console.log("mapping doesnt exist, creating new")
+        this.mapping = {}
+        this.mapping.city = this.theatreForm.city;
+        this.mapping.theatre = this.theatreForm.theatre;
+        this.mapping.movie = this.theatreForm.movie;
+        this.mapping.dates = [];
+        this.mapping.timings = [];
+      }
+      console.log(this.mapping);
     }
 
-    addMapping(){
-      // this.theatreForm.dates = [];
-      // this.theatreForm.timings = [];
-      // this.theatreForm.dates.push(this.date);
-      // this.theatreForm.timings.push(this.timing);
-      console.log(this.theatreForm);
-      this.$http.post('api/theatre-mappings',this.theatreForm);
-      this.theatreForm = '';
+    searchMapping(){
+        return  _.find( this.mappings, (mapping)=>{ return mapping.city === this.theatreForm.city && mapping.theatre === this.theatreForm.theatre && mapping.movie === this.theatreForm.movie } );
+        // console.log(this.mappings);
+        // console.log(mapping)
     }
 
     addDate(){
-      // console.log(this.theatreForm);
-      // this.theatreForm.dates = [];
-      // var Dayname = new Date(this.date).
-
-      this.date = new Date(this.date);
-      this.theatreForm.dates.push(this.date);
-      console.log(this.theatreForm.dates);
+      this.mapping.dates.push(this.theatreForm.date + '');
+      console.log(this.mapping);
     }
 
     removeDate(i){
-      console.log(i);
-      this.theatreForm.dates.splice(i,1);
-      console.log(this.theatreForm.dates);
-    }
-
-    at(){
-      console.log("dummy");
+      this.mapping.dates.splice(i,1);
     }
 
     addTiming(){
-      // this.theatreForm.times = [];
-      console.log(this.timing);
-      this.theatreForm.timings.push(this.timing);
-      console.log(this.theatreForm.timings);
+      this.mapping.timings.push(this.theatreForm.timing + '')
     }
 
     removeTiming(i){
-      console.log(i);
-      this.theatreForm.timings.splice(i,1);
-      console.log(this.theatreForm.timings);
+      this.mapping.timings.splice(i,1);
     }
 
     PostOrUpdateMapping(city, theatre, movie){
-      console.log('theatre mappings')
-      // console.log(this.mapping[0]);
-      // console.log(this.mappings)
-      this.mapping = _.find(this.mappings, (mapping)=>{ return mapping.city === this.theatreForm.city && mapping.movie === this.theatreForm.movie && mapping.theatre === this.theatreForm.theatre});
-      console.log(this.mapping);
-      if(this.mapping){
-        console.log("mapping exists");
-        console.log('api/theatre-mappings/' + this.mapping._id);
-        this.$http.put('api/theatre-mappings/'+ this.mapping._id,{
-          dates: this.theatreForm.dates,
-          timings: this.theatreForm.timings
+      console.log(this.searchMapping());
+      var mapping = this.searchMapping();
+      console.log(mapping);
+      if(mapping)
+      {
+        console.log("mapping exists, updating changes...");
+        this.$http.put('/api/theatre-mappings/' + mapping._id, {
+          dates: this.mapping.dates,
+          timings: this.mapping.timings
+        }).then(response =>{
+          console.log(response);
+          this.mappings = _.reject(this.mappings, (map)=>{ return map._id === mapping._id });
+          this.mappings.push(response.data);
+          console.log(this.mappings);
         })
       }
-      else{
-        this.$http.post('api/theatre-mappings',this.theatreForm);
+      else {
+        console.log("mapping doesn't exist, posting new...");
+        this.$http.post('/api/theatre-mappings', this.mapping).then( (response) =>
+          {
+              console.log(response);
+              this.mappings = _.reject(this.mappings, (map)=>{ return map._id === mapping._id });
+              this.mappings.push(response.data);
+
+              console.log(this.mappings);
+          }, (err) => console.log(err) );
       }
     }
 
     deleteMapping(){
-      console.log(this.mapping);
-      this.$http.delete('api/theatre-mappings/' + this.mapping._id);
-      this.mapping = {};
+      var mapping = this.searchMapping();
+      if(mapping){
+        this.$http.delete('/api/theatre-mappings/' + mapping._id).then( response =>{
+           console.log(response);
+           this.mappings = _.reject(this.mappings, (map)=>{ return map._id === mapping._id });
+          //  this.mappings.push(response.data);
+         });
+      }
+      else {
+        console.log("Mapping doesn't exist")
+      }
     }
 
   }

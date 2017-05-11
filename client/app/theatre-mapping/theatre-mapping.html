@@ -20,14 +20,14 @@
       <option ng-repeat="movie in theatreMappingCtrl.movies">{{ movie.Title }}</option>
     </select>
   </div>
-  <button type="button" name="button" class="btn btn-primary" ng-click="theatreMappingCtrl.searchMapping()">Search Mapping</button>
+  <button type="button" name="button" class="btn btn-primary" ng-click="theatreMappingCtrl.addMapping()">Search Mapping</button>
   <div class="row">
     <div>
       <h3>Add dates</h3>
-      <input type="date" name="" value="" ng-model="theatreMappingCtrl.date">
+      <input type="date" name="" value="" ng-model="theatreMappingCtrl.theatreForm.date">
       <button type="button" name="button" class="btn btn-submit" ng-click="theatreMappingCtrl.addDate()">Add Date</button>
       <table class="table col-md-6">
-        <tr ng-repeat="date in theatreMappingCtrl.theatreForm.dates track by $index">
+        <tr ng-repeat="date in theatreMappingCtrl.mapping.dates track by $index">
           <td>{{date}}</td>
           <td><button type="button" name="button" class="btn btn-danger" ng-click="theatreMappingCtrl.removeDate($index)">x</button></td>
         </tr>
@@ -35,11 +35,11 @@
     </div>
     <div>
       <h3>Add Timings</h3>
-      <input type="time" name="" value="" ng-model="theatreMappingCtrl.timing">
+      <input type="time" name="" value="" ng-model="theatreMappingCtrl.theatreForm.timing">
       <button type="button" name="button" class="btn btn-submit" ng-click="theatreMappingCtrl.addTiming()">Add timing</button>
     </div>
     <table class="table col-md-6">
-      <tr ng-repeat="timing in theatreMappingCtrl.theatreForm.timings track by $index">
+      <tr ng-repeat="timing in theatreMappingCtrl.mapping.timings track by $index">
         <td>{{timing}}</td>
         <td><button type="button" name="button" class="btn btn-danger" ng-click="theatreMappingCtrl.removeTiming($index)">x</button></td>
       </tr>
