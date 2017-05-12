@@ -9,7 +9,7 @@ import City from './city.model';
 var CityEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
-CityEvents.setMaxListeners(0);
+CityEvents.setMaxListeners(20);
 
 // Model events
 var events = {

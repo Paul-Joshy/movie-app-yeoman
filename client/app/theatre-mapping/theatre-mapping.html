@@ -28,7 +28,7 @@
       <button type="button" name="button" class="btn btn-submit" ng-click="theatreMappingCtrl.addDate()">Add Date</button>
       <table class="table col-md-6">
         <tr ng-repeat="date in theatreMappingCtrl.mapping.dates track by $index">
-          <td>{{date}}</td>
+          <td>{{ theatreMappingCtrl.genDate(date) }}</td>
           <td><button type="button" name="button" class="btn btn-danger" ng-click="theatreMappingCtrl.removeDate($index)">x</button></td>
         </tr>
       </table>
@@ -40,7 +40,7 @@
     </div>
     <table class="table col-md-6">
       <tr ng-repeat="timing in theatreMappingCtrl.mapping.timings track by $index">
-        <td>{{timing}}</td>
+        <td>{{theatreMappingCtrl.genTiming(timing)}}</td>
         <td><button type="button" name="button" class="btn btn-danger" ng-click="theatreMappingCtrl.removeTiming($index)">x</button></td>
       </tr>
     </table>

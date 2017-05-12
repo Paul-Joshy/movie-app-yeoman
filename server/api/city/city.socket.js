@@ -14,7 +14,6 @@ export function register(socket) {
   for (var i = 0, eventsLength = events.length; i < eventsLength; i++) {
     var event = events[i];
     var listener = createListener('city:' + event, socket);
-
     CityEvents.on(event, listener);
     socket.on('disconnect', removeListener(event, listener));
   }

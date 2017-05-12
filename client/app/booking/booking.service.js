@@ -6,7 +6,6 @@ function bookingService() {
   movieDetails.name = "";
   movieDetails.date = "";
   movieDetails.time = "";
-  // movieDetails.bookedSeats = [];
   movieDetails.selectedSeats = [];
   movieDetails.grandTotal = ""
 
@@ -19,12 +18,7 @@ function bookingService() {
     movieDetails.time = time;
   }
 
-  // this.setTime = function(time){
-  //   movieDetails.time = time;
-  // }
-
   this.addSelected = function(selected, grandTotal){
-    // movieDetails.bookedSeats = movieDetails.bookedSeats.concat(selected);
     movieDetails.selectedSeats = selected;
     movieDetails.grandTotal = grandTotal;
   }

@@ -14,7 +14,6 @@ class MoviesComponent {
     this.$http.get('/api/movies')
     .then(response => {
       this.movies = response.data;
-      console.log(this.movies);
       this.socket.syncUpdates('movie', this.movies);
     });
   }
@@ -24,23 +23,22 @@ class MoviesComponent {
     this.$http.get('http://www.omdbapi.com/?t='+this.search.title)
       .then(response => {
         this.movieData = response.data;
-        console.log(this.movieData);
-        this.socket.syncUpdates('movie', this.movieData);
       });
   }
 
   addMovie() {
-      this.$http.post('/api/movies', {
-        Title: this.movieData.Title,
-        Year: this.movieData.Year,
-        Genre: this.movieData.Genre,
-        Plot: this.movieData.Plot,
-        Actors: this.movieData.Actors,
-        Director: this.movieData.Director,
-        Runtime: this.movieData.Runtime,
-        Poster: this.movieData.Poster
-      });
-      this.newMovie = '';
+    // console.log(this.movieData.Poster)
+    this.$http.post('/api/movies', {
+      Title: this.movieData.Title,
+      Year: this.movieData.Year,
+      Genre: this.movieData.Genre,
+      Plot: this.movieData.Plot,
+      Actors: this.movieData.Actors,
+      Director: this.movieData.Director,
+      Runtime: this.movieData.Runtime,
+      Poster: this.movieData.Poster
+    });
+    this.newMovie = '';
 
       // this.$http.get('/api/movies').then(response => {
       //   this.movies = response.data;

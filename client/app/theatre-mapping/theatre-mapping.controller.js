@@ -78,11 +78,23 @@ class TheatreMappingComponent {
         // console.log(mapping)
     }
 
+    genDate(date){
+      var day = new Date(date).getDate();
+      var month = new Date(date).getMonth();
+      var year = new Date(date).getFullYear();
+      return `${day}.${month}.${year}`;
+    }
+
+    genTiming(timing){
+      var hours = new Date(timing).getHours();
+      var minutes = new Date(timing).getMinutes();
+      return `${hours}.${minutes}`;
+    }
+
     addDate(){
-      var day = new Date(this.theatreForm.date).getDate();
-      var month = new Date(this.theatreForm.date).getMonth();
-      var year = new Date(this.theatreForm.date).getFullYear();
-      this.mapping.dates.push(`${day}.${month}.${year}`);
+      var date = new Date(this.theatreForm.date);
+      this.mapping.dates.push(date);
+      this.mapping.dates = _.sortBy( this.mapping.dates, (date)=>{ return date } );
       console.log(this.mapping);
     }
 
@@ -91,9 +103,9 @@ class TheatreMappingComponent {
     }
 
     addTiming(){
-      var hours = new Date(this.theatreForm.timing).getHours();
-      var minutes = new Date(this.theatreForm.timing).getMinutes();
-      this.mapping.timings.push(`${hours}.${minutes}`);
+      var timing = new Date(this.theatreForm.timing);
+      this.mapping.timings.push(timing);
+      this.mapping.timings = _.sortBy( this.mapping.timings, (timing)=>{ return timing } );
       console.log(this.mapping);
     }
 
@@ -116,7 +128,7 @@ class TheatreMappingComponent {
           console.log(this.mappings);
           this.mappings = _.reject(this.mappings, (map)=>{ return map._id === mapping._id });
           this.mappings.push(response.data);
-          
+
         })
       }
       else {

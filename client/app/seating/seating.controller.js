@@ -71,7 +71,7 @@ class SeatingComponent {
     this.movieDetails = this.bookingService.getDetails();
     this.bookedSeats = this.movieDetails.bookedSeats;
     this.selectedSeats = [];
-    this.$location.path('/payments');
+    this.$location.path('/payment');
   }
 }
 

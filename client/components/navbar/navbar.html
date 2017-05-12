@@ -15,6 +15,10 @@
             <a ng-href="{{item.link}}">{{item.title}}</a>
         </li>
         <li ng-show="nav.isAdmin()" ng-class="{active: nav.isActive('/admin')}"><a href="/admin">Admin</a></li>
+        <li ng-show="nav.isAdmin()" ng-class="{active: nav.isActive('/cities')}"><a href="/cities">Cities</a></li>
+        <li ng-show="nav.isAdmin()" ng-class="{active: nav.isActive('/movies')}"><a href="/movies">Movies</a></li>
+        <li ng-show="nav.isAdmin()" ng-class="{active: nav.isActive('/theatres')}"><a href="/theatres">Theatres</a></li>
+        <li ng-show="nav.isAdmin()" ng-class="{active: nav.isActive('/theatre-mapping')}"><a href="/theatre-mapping">Mapping</a></li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">

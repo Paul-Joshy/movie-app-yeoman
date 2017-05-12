@@ -1,11 +1,18 @@
 <div class="">
-  <div class="">
+  <div class="container">
     <h1>Movies currently playing</h1>
     <div class="row">
-      <div class="col-sm-2" ng-repeat="movie in $ctrl.movies">
+      <div class="col-sm-3" ng-repeat="movie in $ctrl.movies">
         <div class="thumbnail">
           <img src="{{movie.Poster}}" alt="{{movie.Title}}">
-          <a class="btn col-md-12 btn-primary" ng-click="$ctrl.selectMovie(movie.Title)">SHOW TIMINGS</a>
+          <div class="caption">
+            <h3>{{movie.Title}}</h3>
+            <p><bold>genre:</bold> {{movie.Genre}}</p>
+
+            <p>
+              <a class="btn btn-primary" ng-click="$ctrl.selectMovie(movie.Title)">TIMINGS</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>

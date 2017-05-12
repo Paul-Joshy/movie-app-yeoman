@@ -3,13 +3,36 @@
 import mongoose from 'mongoose';
 
 var MovieSchema = new mongoose.Schema({
-  Title: String,
+  Title: {
+    type: String,
+    required: true,
+    unique: true
+  },
   Year: Number,
-  Genre: String,
-  Plot: String,
-  Actors: String,
-  Director: String,
-  Runtime: String
+  Genre: {
+    type: String,
+    required: true
+  },
+  Plot: {
+    type: String,
+    required: true
+  },
+  Actors: {
+    type: String,
+    required: true
+  },
+  Director: {
+    type: String,
+    required: true
+  },
+  Runtime: {
+    type: String,
+    required: true
+  },
+  Poster: {
+    type: String,
+    required: true
+  }
 });
 
 export default mongoose.model('Movie', MovieSchema);
