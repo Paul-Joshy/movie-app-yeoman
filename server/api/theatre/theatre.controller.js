@@ -88,45 +88,43 @@ export function update(req, res) {
     delete req.body._id;
   }
 
-  TheatreMapping.find({theatre: req.body.theatre + ' - ' + req.body.location}, function(err, theatreMappings){
-
-    if(err){
-      return err;
-    }
-
-    else if(theatreMappings.length){
-      // res.send(theatreMappings);
-      res.send(theatreMappings);
-    }
-
-    else{
-      return Theatre.findById(req.params.id).exec()
-      .then(handleEntityNotFound(res))
-      .then(saveUpdates(req.body))
-      .then(respondWithResult(res))
-      .catch(handleError(res));
-    }
+  Theatre.findById(req.params.id).exec( function(err, theatre){
+    TheatreMapping.find({theatre: theatre.name + ' - ' + theatre.location}).exec()
+    .then( function(mappings){
+      if(mappings.length){
+        throw { name: "Invalid request", message: "cannot update theatre, mapping exists" };
+      } else {
+        Theatre.findByIdAndUpdate(req.params.id).exec()
+        .then(handleEntityNotFound(res))
+        .then(saveUpdates(req.body))
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+      }
+    })
+    .then(handleEntityNotFound(res))
+    .catch(handleError(res))
   })
+  .then(handleEntityNotFound(res))
+  .catch(handleError(res));
 }
 
 // Deletes a Theatre from the DB
 export function destroy(req, res) {
-
-  TheatreMapping.find({theatre: req.body.theatre + ' - ' + req.body.location}, function(err, theatreMappings){
-
-    if(err){
-      return err;
-    }
-    else if(theatreMappings.length){
-      // res.send(theatreMappings);
-      res.send(theatreMappings);
-    }
-    else{
-      return Theatre.findById(req.params.id).exec()
-      .then(handleEntityNotFound(res))
-      .then(removeEntity(res))
-      .catch(handleError(res));
-    }
+  Theatre.findById(req.params.id).exec( function(err, theatre){
+    TheatreMapping.find({theatre: theatre.name + ' - ' + theatre.location}).exec()
+    .then( function(mappings){
+      if(mappings.length){
+        throw { name: "Invalid request", message: "cannot delete theatre, mapping exists" };
+      } else {
+        Theatre.findByIdAndRemove(req.params.id).exec()
+        .then(handleEntityNotFound(res))
+        .then(removeEntity(res))
+        .catch(handleError(res));
+      }
+    })
+    .then(handleEntityNotFound(res))
+    .catch(handleError(res))
   })
-
-}
+  .then(handleEntityNotFound(res))
+  .catch(handleError(res));
+};

@@ -15,14 +15,14 @@ var TheatreMappingSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  dates: [{
-    type:String,
+  dates: {
+    type:[String],
     required:true
-  }],
-  timings: [{
-    type:String,
+  },
+  timings: {
+    type:[String],
     required:true
-  }]
+  }
 });
 
 TheatreMappingSchema.index({ movie: 1, theatre: 1, city: 1 }, { unique: true });

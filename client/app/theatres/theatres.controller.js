@@ -31,7 +31,7 @@ class TheatresComponent {
     this.$http.get('/api/theatres/').then(response =>{
       this.theatres = response.data;
       console.log(this.theatres);
-      // this.socket.syncUpdates('theatre', this.theatres);
+      this.socket.syncUpdates('theatre', this.theatres);
     });
   }
 
@@ -47,10 +47,9 @@ class TheatresComponent {
   }
 
   deleteTheatre(theatre){
-    console.log("dsfs");
-        this.$http.delete('api/theatres/' + theatre._id).then(response => {
-          console.log(response);
-        });
+    this.$http.delete('api/theatres/' + theatre._id).then(response => {
+      console.log(response);
+    });
   }
 
   saveTheatre(theatre){
