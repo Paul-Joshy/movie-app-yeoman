@@ -3,6 +3,7 @@
 function bookingService() {
 	// AngularJS will instantiate a singleton by calling "new" on this function
   var movieDetails = {};
+  movieDetails.theatre = "";
   movieDetails.name = "";
   movieDetails.date = "";
   movieDetails.time = "";

@@ -20,7 +20,7 @@ class SeatingComponent {
 
   $onInit(){
     this.$http.get('/api/payments').then(response => {
-      this.bookedSeats = _.flatten( _.map( response.data, (seat)=>{ return seat.bookedSeats }) );
+      this.bookedSeats = _.flatten( _.map( _.filter(response.data, (detail)=>{ return detail.name === this.movieDetails.name && detail.theatre === this.movieDetails.theatre } ), (seat)=>{ return seat.bookedSeats }) );
       console.log(this.bookedSeats);
     } );
     this.movieDetails = this.bookingService.getDetails();
