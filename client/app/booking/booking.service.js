@@ -7,13 +7,15 @@ function bookingService() {
   movieDetails.date = "";
   movieDetails.time = "";
   movieDetails.selectedSeats = [];
-  movieDetails.grandTotal = ""
+  movieDetails.grandTotal = "";
+  var paymentDetails ={};
 
   this.setName = function(name){
     movieDetails.name = name;
   }
 
-  this.setTimings = function(date, time){
+  this.addTheatre = function(theatre, date, time){
+    movieDetails.theatre = theatre;
     movieDetails.date = date;
     movieDetails.time = time;
   }

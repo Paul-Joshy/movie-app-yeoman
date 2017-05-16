@@ -39,7 +39,9 @@
       <table>
         <tr>
           <td>No of seats:</td>
-          <td ng-repeat="seat in seatingCtrl.bookingForm.gold track by $index">{{seat.row}}{{seat.col}},</td>
+          <td>
+            <a class="no-decoration" ng-repeat="seat in seatingCtrl.bookingForm.gold track by $index">{{seat.row}}{{seat.col}}{{ $index < seatingCtrl.bookingForm.gold.length - 1 ? ', ' : '' }}</a>
+          </td>
         </tr>
         <tr>
           <td>Seat Count:</td>
@@ -60,7 +62,9 @@
       <table>
         <tr>
           <td>No of seats:</td>
-          <td ng-repeat="seat in seatingCtrl.bookingForm.silver track by $index">{{seat.row}}{{seat.col}},</td>
+          <td>
+            <a class="no-decoration" ng-repeat="seat in seatingCtrl.bookingForm.silver track by $index">{{seat.row}}{{seat.col}}{{ $index < seatingCtrl.bookingForm.gold.length - 1 ? ', ' : '' }}</a>
+          </td>
         </tr>
         <tr>
           <td>Seat Count:</td>

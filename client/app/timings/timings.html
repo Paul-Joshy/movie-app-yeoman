@@ -9,7 +9,7 @@
     <table class="table">
       <tr ng-repeat="mapping in timingsCtrl.filteredMappings">
         <td>{{mapping.theatre}}</td>
-        <td ng-repeat="timing in mapping.timings"><a ng-click="timingsCtrl.selectTimings(timing)">{{ timingsCtrl.genTiming(timing) }}</a></td>
+        <td ng-repeat="timing in mapping.timings"><a ng-click="timingsCtrl.selectTimings(mapping.theatre, timing)">{{ timingsCtrl.genTiming(timing) }}</a></td>
       </tr>
     </table>
   </div>

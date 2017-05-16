@@ -19,12 +19,15 @@ class SeatingComponent {
   }
 
   $onInit(){
+    this.$http.get('/api/payments').then(response => {
+      // this.bookedSeats = _.map( response.data, (seat)=>{ return seat.bookedSeats } );
+      // console.log("bhjbj",this.bookedSeats);
+    } );
     this.movieDetails = this.bookingService.getDetails();
     console.log(this.movieDetails);
     console.log(this.rows);
     console.log(this.columns);
-    // this.bookedSeats = this.movieDetails.bookedSeats;
-    console.log(this.bookedSeats);
+    console.log(this.selectedSeats);
   }
 
   isSelected(row, col){

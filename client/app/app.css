@@ -73,3 +73,12 @@
 .ghost{
   margin:10px;
 }
+
+.no-decoration:hover{
+  text-decoration: none;
+  color: black;
+}
+
+.no-decoration{
+  color: black;
+}

@@ -46,7 +46,7 @@ class TimingsComponent {
     // var month = new Date(date).getMonth();
     var dayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][new Date(date).getDay()];
     var year = new Date(date).getFullYear();
-    return `${day},${dayName}`;
+    return `${day}, ${dayName}`;
   }
 
   genTiming(timing){
@@ -58,14 +58,14 @@ class TimingsComponent {
   selectDate(date){
     // console.log(date);
     this.timings.date = date;
-    this.filteredMappings = _.filter(this.theatreMappings, function(mapping){ return _.contains(mapping.dates, date)});
+    this.filteredMappings = _.filter(this.theatreMappings, function(mapping){ return _.contains(mapping.dates, date) });
     // console.log(this.filteredMappings);
     // this.$location.path('#theatre-timings');
   }
 
-  selectTimings(time){
+  selectTimings(theatre, time){
     // console.log(this.timings.date, time);
-    this.bookingService.setTimings(this.timings.date, time);
+    this.bookingService.addTheatre(theatre, this.timings.date, time);
     // console.log(this.bookingService.getDetails());
     this.$location.path('/seating');
   }
