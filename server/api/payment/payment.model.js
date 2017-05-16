@@ -17,7 +17,7 @@ var PaymentSchema = new mongoose.Schema({
   bookedSeats: [{
     classType: String,
     row: String,
-    col: String
+    col: Number
   }],
   grandTotal:{
     type: Number,

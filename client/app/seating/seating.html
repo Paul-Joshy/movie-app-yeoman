@@ -1,35 +1,37 @@
 <div class="container">
   <div class="col-md-6">
     <h2>Seating</h2>
-    <h5>GOLD</h5>
-    <div class=""  ng-repeat="row in seatingCtrl.rows | limitTo:3:0">
-      <div class="inline">
-        {{row}}
-      </div>
-      <div ng-repeat="col in seatingCtrl.columns" class="inline">
-        <div class="seats" ng-class="{'selected': seatingCtrl.isSelected(row, col), 'booked': seatingCtrl.isBooked(row, col)}"  ng-click="seatingCtrl.selectSeat(row, col, 'gold')">
-          {{col}}
-        </div>
-        <!-- <div class="ghost"></div>
-        <div class="seats" ng-class="{'selected': seatingCtrl.isSelected(row, col), 'booked': seatingCtrl.isBooked(row, col)}"  ng-click="seatingCtrl.selectSeat(row, col)">
-          {{col}}
-        </div> -->
-      </div>
-    </div>
-
-    <h5>SILVER</h5>
-    <div class=""  ng-repeat="row in seatingCtrl.rows | limitTo:-3">
-      <div class="inline">
-        {{row}}
-      </div>
-      <div ng-repeat="col in seatingCtrl.columns" class="inline">
-        <div class="seats" ng-class="{'selected': seatingCtrl.isSelected(row, col), 'booked': seatingCtrl.isBooked(row, col)}"  ng-click="seatingCtrl.selectSeat(row, col, 'silver')">
-          {{col}}
+    <div class="" ng-if="seatingCtrl.bookedSeats !== undefined">
+        <h5>GOLD</h5>
+        <div class="" ng-repeat="row in seatingCtrl.rows | limitTo:3:0">
+          <div class="inline">
+            {{row}}
+          </div>
+          <div ng-repeat="col in seatingCtrl.columns" class="inline">
+            <div class="seats" ng-class="{'selected': seatingCtrl.isSelected(row, col), 'booked': seatingCtrl.isBooked(row, col)}"  ng-click="seatingCtrl.selectSeat(row, col, 'gold')">
+              {{col}}
+            </div>
+            <!-- <div class="ghost"></div>
+            <div class="seats" ng-class="{'selected': seatingCtrl.isSelected(row, col), 'booked': seatingCtrl.isBooked(row, col)}"  ng-click="seatingCtrl.selectSeat(row, col)">
+            {{col}}
+          </div> -->
         </div>
       </div>
+
+      <h5>SILVER</h5>
+      <div class=""  ng-repeat="row in seatingCtrl.rows | limitTo:-3">
+        <div class="inline">
+          {{row}}
+        </div>
+        <div ng-repeat="col in seatingCtrl.columns" class="inline">
+          <div class="seats" ng-class="{'selected': seatingCtrl.isSelected(row, col), 'booked': seatingCtrl.isBooked(row, col)}"  ng-click="seatingCtrl.selectSeat(row, col, 'silver')">
+            {{col}}
+          </div>
+        </div>
+      </div>
+      <button type="button" name="button" class="btn btn-success" ng-click="seatingCtrl.bookSeats()">Book tickets</button>
     </div>
 
-    <button type="button" name="button" class="btn btn-success" ng-click="seatingCtrl.bookSeats()">Book tickets</button>
   </div>
   <div class="col-md-6">
     <h2>Booking Summary</h2>

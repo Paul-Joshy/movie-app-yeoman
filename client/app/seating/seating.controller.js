@@ -12,7 +12,7 @@ class SeatingComponent {
     this.columns = [1,2,3,4,5,6,7,8,9,10];
     // this.selected = false;
     this.selectedSeats = [];
-    this.bookedSeats = [];
+    this.bookedSeats = undefined;
     this.bookingForm = {};
     this.$location = $location;
     this.movieDetails = {};
@@ -20,8 +20,8 @@ class SeatingComponent {
 
   $onInit(){
     this.$http.get('/api/payments').then(response => {
-      // this.bookedSeats = _.map( response.data, (seat)=>{ return seat.bookedSeats } );
-      // console.log("bhjbj",this.bookedSeats);
+      this.bookedSeats = _.flatten( _.map( response.data, (seat)=>{ return seat.bookedSeats }) );
+      console.log(this.bookedSeats);
     } );
     this.movieDetails = this.bookingService.getDetails();
     console.log(this.movieDetails);
@@ -40,6 +40,7 @@ class SeatingComponent {
 
   isBooked(row, col){
     if(_.find(this.bookedSeats, function(seat){ return seat.row === row && seat.col === col})){
+      console.log(this.bookedSeats);
         return true;
     } else{
       return false;
@@ -48,7 +49,7 @@ class SeatingComponent {
 
   selectSeat(row, col, classType){
     if(!this.isSelected(row, col) && !this.isBooked(row, col)){
-      console.log("selected")
+      console.log("selected");
       this.selectedSeats.push({
         row: row,
         col: col,
