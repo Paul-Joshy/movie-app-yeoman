@@ -32,12 +32,23 @@
         <span class="glyphicon glyphicon-chevron-right"></span>
         <span class="sr-only">Next</span>
       </a>
-      <div class="container">
-      </div>
     </div>
+
+    <div id="searchbar">
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> {{$ctrl.query.city || "CITY"}}
+          <span class="caret"></span></button>
+          <ul class="dropdown-menu">
+            <li ng-repeat="city in $ctrl.cities" ng-click="$ctrl.filterMovies(city)">{{city}}</li>
+          </ul>
+        </div>
+        <input type="text" ng-model="$ctrl.query.movie">
+    </div>
+
     <h1>Movies currently playing</h1>
     <div class="row">
-      <div class="col-sm-3" ng-repeat="movie in $ctrl.movies">
+      <div class="col-sm-3" ng-repeat="movie in $ctrl.filteredMovies | filter:{ Title: $ctrl.query.movie }">
+
         <div class="thumbnail">
           <img src="{{movie.Poster}}" alt="{{movie.Title}}">
           <div class="caption">
