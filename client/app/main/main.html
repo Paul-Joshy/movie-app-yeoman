@@ -32,20 +32,35 @@
         <span class="glyphicon glyphicon-chevron-right"></span>
         <span class="sr-only">Next</span>
       </a>
-    </div>
 
-    <div id="searchbar">
-      <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"> {{$ctrl.query.city || "CITY"}}
-          <span class="caret"></span></button>
-          <ul class="dropdown-menu">
-            <li ng-repeat="city in $ctrl.cities" ng-click="$ctrl.filterMovies(city)">{{city}}</li>
-          </ul>
+
+      </div>
+      <form id="searchbar" class="form-inline">
+
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-lg btn-danger" data-toggle="modal" data-target="#city-modal">
+          {{$ctrl.query.city || "CITY"}}
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="city-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Cities</h4>
+              </div>
+              <div class="modal-body">
+                <ul class="list-group">
+                  <li class="list-group-item" data-dismiss="modal" ng-repeat="city in $ctrl.cities" ng-click="$ctrl.filterMovies(city)">{{ city }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
-        <input type="text" ng-model="$ctrl.query.movie">
-    </div>
-
-    <h1>Movies currently playing</h1>
+        <input type="text" ng-model="$ctrl.query.movie" class="form-group form-control input-lg" placeholder="Enter Movie Name">
+        </form>
+    <!-- <h1>Movies currently playing</h1> -->
     <div class="row">
       <div class="col-sm-3" ng-repeat="movie in $ctrl.filteredMovies | filter:{ Title: $ctrl.query.movie }">
 
@@ -55,9 +70,10 @@
             <h3>{{movie.Title}}</h3>
             <p><bold>genre:</bold> {{movie.Genre}}</p>
 
-            <p>
-              <a class="btn btn-primary" ng-click="$ctrl.selectMovie(movie.Title)">TIMINGS</a>
-            </p>
+            <div class="row">
+              <button class="btn btn-primary col-md-12" ng-click="$ctrl.selectMovie(movie.Title)">TIMINGS</button>
+            </div>
+
           </div>
         </div>
       </div>

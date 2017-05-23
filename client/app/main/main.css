@@ -25,3 +25,13 @@
 .navbar-text {
   margin-left: 15px;
 }
+
+
+#myCarousel{
+  position: relative;
+}
+
+#searchbar{
+  /*background-color: red;*/
+  text-align: center;
+}

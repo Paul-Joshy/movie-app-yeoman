@@ -19,17 +19,21 @@ var MovieSchema = new mongoose.Schema({
   },
   Actors: {
     type: String,
-    required: true
+    // required: true
   },
   Director: {
     type: String,
-    required: true
+    // required: true
   },
   Runtime: {
     type: String,
     required: true
   },
   Poster: {
+    type: String,
+    required: true
+  },
+  Backdrop: {
     type: String,
     required: true
   }

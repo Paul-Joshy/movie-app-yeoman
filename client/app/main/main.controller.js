@@ -45,10 +45,21 @@
           this.movies = _.filter(this.movies, (movie)=>{ return _.find(this.movieNames, (title)=>{ return title === movie.Title }) } )
           console.log(this.movies)
         })
-      })
+
+        $('#ratings').rateYo({
+          rating: 3.6
+        });
+      });
+
+
     }
 
     filterMovies(city){
+
+      $('html, body').animate({
+        scrollTop: $("#searchbar").offset().top
+    }, 1000);
+
       console.log('this.movies');
       console.log(this.mappings)
       this.query.city = city;
