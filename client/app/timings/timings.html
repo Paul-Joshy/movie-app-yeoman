@@ -1,16 +1,17 @@
-<div class="page-header" ng-style="{ background-image: 'url({{timingsCtrl.bookingService.backdrop}})' }">
-  <h1>{{ timingsCtrl.bookingService.movieDetails.name }} <small>{{ timingsCtrl.bookingService.backdrop }} rgeS</small></h1>
+<div class="page-header" ng-style="{ 'background-image': 'url({{timingsCtrl.bookingService.backdrop}})' }">
+  <h1 class="align-center">{{ timingsCtrl.bookingService.movieDetails.name }}</h1>
 </div>
+
 <ul class="nav nav-pills">
   <li ng-repeat="date in timingsCtrl.dates" ><a data-toggle="pill" ng-click="timingsCtrl.selectDate(date)">{{ timingsCtrl.genDate(date) }}</a></li>
 </ul>
 
 <div>
   <div>
-    <table class="table">
+    <table class="table table-striped">
       <tr ng-repeat="mapping in timingsCtrl.filteredMappings">
         <td>{{mapping.theatre}}</td>
-        <td ng-repeat="timing in mapping.timings"><a ng-click="timingsCtrl.selectTimings(mapping.theatre, timing)">{{ timingsCtrl.genTiming(timing) }}</a></td>
+        <td ng-repeat="timing in mapping.timings"><button class="btn btn-default" ng-click="timingsCtrl.selectTimings(mapping.theatre, timing)">{{ timingsCtrl.genTiming(timing) }}</button></td>
       </tr>
     </table>
   </div>

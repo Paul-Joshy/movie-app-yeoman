@@ -1,0 +1,13 @@
+.page-header{
+  margin-top: 0px;
+  height: 200px;
+  color: white;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  text-align: center;
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%) blur(500);
+}
