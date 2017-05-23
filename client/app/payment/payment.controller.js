@@ -13,12 +13,12 @@ class PaymentComponent {
   }
 
   $onInit(){
-    this.movieDetails = this.bookingService.getDetails();
+    this.movieDetails = this.bookingService.movieDetails;
     console.log(this.movieDetails);
   }
 
   pay(){
-    console.log(this.movieDetails.selectedSeats);
+    console.log(this.movieDetails);
     this.$http.post('/api/payments',{
       name: this.movieDetails.name,
       theatre: this.movieDetails.theatre,

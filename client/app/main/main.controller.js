@@ -15,6 +15,7 @@
       // this.movieNames = undefined;
       // this.cities = undefined;
       this.query = {};
+      this.showMovies = false;
       // this.query.city = undefined;
 
       $scope.$on('$destroy', function() {
@@ -64,13 +65,16 @@
       console.log(this.mappings)
       this.query.city = city;
       this.filteredMovies = _.filter(this.movies, (movie)=>{ return _.contains( _.pluck( _.filter(this.mappings, (mapping)=>{ return mapping.city === this.query.city } ), 'movie' ), movie.Title ) } );
+      this.showMovies = true;
       console.log(this.filteredMovies);
     }
 
     selectMovie(name){
-      console.log(this.bookingService.setName);
-      this.bookingService.setName(name);
+      console.log(name);
+      this.bookingService.movieDetails.name = name;
       this.$location.path('/timings');
+      this.bookingService.backdrop = _.find(this.movies, (movie)=>{return movie.Title === name}).Backdrop;
+      console.log(this.bookingService);
     }
   }
 

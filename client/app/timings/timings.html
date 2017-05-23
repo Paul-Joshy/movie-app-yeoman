@@ -1,5 +1,6 @@
-<h2>Movie Timings</h2>
-
+<div class="page-header" ng-style="{ background-image: 'url({{timingsCtrl.bookingService.backdrop}})' }">
+  <h1>{{ timingsCtrl.bookingService.movieDetails.name }} <small>{{ timingsCtrl.bookingService.backdrop }} rgeS</small></h1>
+</div>
 <ul class="nav nav-pills">
   <li ng-repeat="date in timingsCtrl.dates" ><a data-toggle="pill" ng-click="timingsCtrl.selectDate(date)">{{ timingsCtrl.genDate(date) }}</a></li>
 </ul>

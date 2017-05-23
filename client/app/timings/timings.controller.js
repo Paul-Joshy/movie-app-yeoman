@@ -14,6 +14,7 @@ class TimingsComponent {
     this.bookingService = booking;
     this.$location = $location;
     this.timings = {};
+    this.backdrop = "";
   }
 
   $onInit() {
@@ -21,8 +22,9 @@ class TimingsComponent {
     .then(response => {
       this.theatreMappings = response.data;
 
-      var movieDetails = this.bookingService.getDetails()
+      var movieDetails = this.bookingService.movieDetails;
       this.theatreMappings =  _.filter(this.theatreMappings, function(mapping){ return mapping.movie === movieDetails.name})
+      this.backdrop = this.bookingService.backdrop;
       console.log(movieDetails);
 
       for( var mapping of this.theatreMappings){
@@ -64,9 +66,12 @@ class TimingsComponent {
   }
 
   selectTimings(theatre, time){
-    // console.log(this.timings.date, time);
-    this.bookingService.addTheatre(theatre, this.timings.date, time);
-    // console.log(this.bookingService.getDetails());
+    console.log(theatre, this.timings.date, time);
+    this.bookingService.movieDetails.theatre = theatre;
+    this.bookingService.movieDetails.date = this.timings.date;
+    this.bookingService.movieDetails.time = time;
+    // this.bookingService.addTheatre(theatre, this.timings.date, time);
+    console.log(this.bookingService.movieDetails);
     this.$location.path('/seating');
   }
 

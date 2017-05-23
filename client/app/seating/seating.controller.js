@@ -23,7 +23,7 @@ class SeatingComponent {
       this.bookedSeats = _.flatten( _.map( _.filter(response.data, (detail)=>{ return detail.name === this.movieDetails.name && detail.theatre === this.movieDetails.theatre } ), (seat)=>{ return seat.bookedSeats }) );
       console.log(this.bookedSeats);
     } );
-    this.movieDetails = this.bookingService.getDetails();
+    this.movieDetails = this.bookingService.movieDetails;
     console.log(this.movieDetails);
     console.log(this.rows);
     console.log(this.columns);
@@ -70,9 +70,11 @@ class SeatingComponent {
 
   bookSeats(){
     console.log("shoop baby");
-    this.bookingService.addSelected(this.selectedSeats, this.bookingForm.grandTotal);
-    console.log(this.bookingService.getDetails());
-    this.movieDetails = this.bookingService.getDetails();
+    this.bookingService.movieDetails.selectedSeats = this.selectedSeats;
+    this.bookingService.movieDetails.grandTotal = this.bookingForm.grandTotal
+    // this.bookingService.addSelected(this.selectedSeats, this.bookingForm.grandTotal);
+    console.log(this.bookingService.movieDetails);
+    this.movieDetails = this.bookingService.movieDetails;
     this.bookedSeats = this.movieDetails.bookedSeats;
     this.selectedSeats = [];
     this.$location.path('/payment');
