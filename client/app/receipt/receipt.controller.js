@@ -11,7 +11,8 @@ class ReceiptComponent {
 
   $onInit(){
     console.log(this.bookingService);
-    this.zip = _.zip( _.pluck(this.bookingService.movieDetails.selectedSeats, 'row'), _.pluck(this.bookingService.movieDetails.selectedSeats, 'col') );
+    this.zip = _.flatten( this.bookingService.movieDetails.selectedSeats );
+    // this.zip = _.zip( _.pluck(this.bookingService.movieDetails.selectedSeats, 'row'), _.pluck(this.bookingService.movieDetails.selectedSeats, 'col') );
   }
 
 }

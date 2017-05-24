@@ -4,6 +4,7 @@ angular.module('movieApp')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/payment', {
-        template: '<payment></payment>'
+        template: '<payment></payment>',
+        authenticate: 'user'
       });
   });

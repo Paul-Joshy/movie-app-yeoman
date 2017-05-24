@@ -1,11 +1,13 @@
 <div class="container">
   <div class="row">
-    <h2 class="">CITIES</h2>
+    <h1 class="">Cities</h1>
     <!-- Button trigger modal -->
-    <input type="text" name="" value="" placeholder="Enter new city" ng-model="citiesCtrl.name">
-    <button type="button" class="btn btn-default" ng-click="citiesCtrl.addCity()">
-      Add City
-    </button>
+    <div class="form-group form-inline">
+      <input class="form-control" type="text" name="" value="" placeholder="Enter new city" ng-model="citiesCtrl.name">
+      <button type="button" class="btn btn-primary" ng-click="citiesCtrl.addCity()">
+        Add City
+      </button>
+    </div>
   </div>
   <div>
     <table class="table">
@@ -16,8 +18,31 @@
       <tr ng-repeat="city in citiesCtrl.cities">
         <td>{{city.name}}</td>
         <td>
-          <button type="button" name="button" class="btn btn-danger" ng-click="citiesCtrl.deleteCity(city)">Delete</button>
-          <button type="button" name="button" class="btn btn-warning" ng-click="citiesCtrl.updateCity(city)">Update</button>
+          <button type="button" name="button" class="btn btn-danger" ng-click="citiesCtrl.deleteCity(city)"><span class="glyphicon glyphicon-trash"></span></button>
+          <!-- <button type="button" name="button" class="btn btn-warning" ng-click="citiesCtrl.updateCity(city)">Update</button> -->
+          <!-- Button trigger modal -->
+          <button type="button" class="btn btn-primary btn-warning" data-toggle="modal" data-target="#{{city.name}}Modal">
+            <span class="glyphicon glyphicon-pencil"></span>
+          </button>
+
+          <!-- Modal -->
+          <div class="modal fade" id="{{city.name}}Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                </div>
+                <div class="modal-body">
+                  <h5>Enter New City Name</h5>
+                  <input class="form-control" type="text" name="" value="" ng-model="citiesCtrl.cityName">
+                </div>
+                <div class="modal-footer">
+                  <button type="button" name="button" class="btn btn-success" ng-click="citiesCtrl.updateCity(city)"><span class="glyphicon glyphicon-send"></span> Save changes</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </td>
       </tr>
     </table>

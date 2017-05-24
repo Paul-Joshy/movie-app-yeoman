@@ -4,6 +4,7 @@ angular.module('movieApp')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/cities', {
-        template: '<cities></cities>'
+        template: '<cities></cities>',
+        authenticate: 'admin'
       });
   });

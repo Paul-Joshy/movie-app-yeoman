@@ -4,6 +4,7 @@ angular.module('movieApp')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/seating', {
-        template: '<seating></seating>'
+        template: '<seating></seating>',
+        authenticate: 'user'
       });
   });

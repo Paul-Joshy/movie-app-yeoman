@@ -16,6 +16,8 @@
       // this.cities = undefined;
       this.query = {};
       this.showMovies = false;
+      this.canRate = true;
+      this.cnt = 0;
       // this.query.city = undefined;
 
       $scope.$on('$destroy', function() {
@@ -46,8 +48,34 @@
           // this.movies = _.filter(this.movies, (movie)=>{ return movie.Title === _.find( _.uniq(_.pluck(this.mappings, 'movie')), (mapping)=>{ return mapping.movie === movie.Title } ) });
           // this.movies = _.filter(this.movies, (movie)=>{ return _.find(this.movieNames, (title)=>{ return title === movie.Title }) } )
           console.log(this.movies);
+          // this.rate();
         })
       });
+    }
+
+    rate(movie) {
+      if(this.cnt===0){
+        this.cnt++;
+        this.$rateYo = $("#rateYo").rateYo();
+      }
+      else{
+        var movieData = _.findWhere(this.movieDetails, {title:movie});
+        this.canRate = false;
+        this.cnt = 0;
+        this.rating += this.$rateYo.rateYo("rating");
+        this.count++;
+        this.avgR = this.rating/this.count;
+        this.rateObj.push({
+          userName: this.userName,
+          hasRated: true
+        });
+        if(this.rateObj.length){
+          this.$http.put('/api/movie-endpoints/' + movieData._id, {
+            avgRating: this.avgR,
+            rating: this.rateObj
+          });
+        }
+      }
     }
 
     filterMovies(city){

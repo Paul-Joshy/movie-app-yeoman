@@ -35,3 +35,34 @@
   /*background-color: red;*/
   text-align: center;
 }
+
+.blurImg {
+  opacity: 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+
+.rateCont{
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.cont:hover .blurImg {
+  opacity: 0.3;
+}
+
+.cont:hover .rateCont {
+  opacity: 1;
+}
+
+#myCarousel{
+  margin-top: 15px;
+}

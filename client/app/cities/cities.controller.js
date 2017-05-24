@@ -36,14 +36,14 @@ class CitiesComponent {
   }
 
   updateCity(city) {
-    console.log('sdfsd');
-    var name = prompt("Enter new city name");
-
+    console.log(city);
     this.$http.put('api/cities/' + city._id, {
-      name: name
+      name: this.cityName
     }).then(response =>{
       console.log(response);
     });
+    // console.log($(`#${city.name}Modal`));
+    $('.modal-backdrop').hide();
   }
 
 }
