@@ -26,7 +26,6 @@ class TheatresComponent {
   }
 
   getTheatres(theatre){
-    // console.log('sdfd');
     this.enableUpdate = false;
     this.$http.get('/api/theatres/').then(response =>{
       this.theatres = response.data;

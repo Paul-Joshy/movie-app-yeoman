@@ -16,9 +16,6 @@ class TheatreMappingComponent {
 
     this.theatreForm = {};
     this.cityMappings = {};
-
-    // this.theatreForm.dates = [];
-    // this.theatreForm.timings = [];
   }
 
     $onInit(){
@@ -27,29 +24,23 @@ class TheatreMappingComponent {
         this.theatres = response.data;
         this.cityMappings = _.groupBy(this.theatres, (theatre)=>{ return theatre.city; });
         console.log(this.theatres);
-        // this.socket.syncUpdates('theatre', this.theatres);
+        this.socket.syncUpdates('theatre', this.theatres);
       });
 
       this.$http.get('/api/movies').then(response =>{
         this.movies = response.data;
-        // console.log(this.theatres);
-        // this.socket.syncUpdates('movie', this.theatres);
+        this.socket.syncUpdates('movie', this.movies);
       });
 
       this.$http.get('/api/cities').then(response =>{
         this.cities = response.data;
-        // console.log(this.theatres);
-        // this.socket.syncUpdates('city', this.theatres);
+        this.socket.syncUpdates('city', this.cities);
       });
 
       this.$http.get('/api/theatre-mappings').then(response =>{
         this.mappings = response.data;
         console.log(this.mappings);
-        // this.socket.syncUpdates('theatreMapping', this.mapppings);
       });
-
-      // groupByCity(){
-
 
     }
 
@@ -74,8 +65,6 @@ class TheatreMappingComponent {
 
     searchMapping(){
         return  _.find( this.mappings, (mapping)=>{ return mapping.city === this.theatreForm.city && mapping.theatre === this.theatreForm.theatre && mapping.movie === this.theatreForm.movie } );
-        // console.log(this.mappings);
-        // console.log(mapping)
     }
 
     genDate(date){
@@ -150,7 +139,6 @@ class TheatreMappingComponent {
         this.$http.delete('/api/theatre-mappings/' + mapping._id).then( response =>{
            console.log(response);
            this.mappings = _.reject(this.mappings, (map)=>{ return map._id === mapping._id });
-          //  this.mappings.push(response.data);
          });
       }
       else {

@@ -28,24 +28,17 @@ class TimingsComponent {
       console.log(movieDetails);
 
       for( var mapping of this.theatreMappings){
-        // // console.log("ewfew");
-        // // console.log(mapping.dates.length);
         for( var i=0; i<mapping.dates.length; i++){
           this.dates.push(mapping.dates[i]);
         }
       }
-      // // console.log(this.dates);
       this.dates = _.uniq(this.dates);
       this.dates = _.sortBy( this.dates, (date)=>{ return date } );
-      // console.log(this.dates);
-      // // console.log(this.theatreMappings);
-      // this.socket.syncUpdates('theatremappings', this.theatreMappings);
     });
   }
 
   genDate(date){
     var day = new Date(date).getDate();
-    // var month = new Date(date).getMonth();
     var dayName = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][new Date(date).getDay()];
     var year = new Date(date).getFullYear();
     return `${day}, ${dayName}`;
@@ -58,11 +51,8 @@ class TimingsComponent {
   }
 
   selectDate(date){
-    // console.log(date);
     this.timings.date = date;
     this.filteredMappings = _.filter(this.theatreMappings, function(mapping){ return _.contains(mapping.dates, date) });
-    // console.log(this.filteredMappings);
-    // this.$location.path('#theatre-timings');
   }
 
   selectTimings(theatre, time){
@@ -70,7 +60,6 @@ class TimingsComponent {
     this.bookingService.movieDetails.theatre = theatre;
     this.bookingService.movieDetails.date = this.timings.date;
     this.bookingService.movieDetails.time = time;
-    // this.bookingService.addTheatre(theatre, this.timings.date, time);
     console.log(this.bookingService.movieDetails);
     this.$location.path('/seating');
   }

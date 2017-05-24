@@ -10,7 +10,6 @@ class SeatingComponent {
     this.bookingService = booking;
     this.rows = ['A','B','C','D','E','F'];
     this.columns = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
-    // this.selected = false;
     this.selectedSeats = [];
     this.bookedSeats = undefined;
     this.bookingForm = {};
@@ -72,17 +71,11 @@ class SeatingComponent {
     console.log("shoop baby");
     this.bookingService.movieDetails.selectedSeats = this.selectedSeats;
     this.bookingService.movieDetails.grandTotal = this.bookingForm.grandTotal
-    // this.bookingService.addSelected(this.selectedSeats, this.bookingForm.grandTotal);
     console.log(this.bookingService.movieDetails);
     this.movieDetails = this.bookingService.movieDetails;
     this.bookedSeats = this.movieDetails.bookedSeats;
     this.selectedSeats = [];
     this.$location.path('/payment');
-    // if(this.bookedSeats.length === 0){
-    // }
-    // else{
-    //   alert("Fill seats")
-    // }
   }
 }
 
