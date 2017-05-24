@@ -9,7 +9,7 @@ class SeatingComponent {
     this.$http = $http;
     this.bookingService = booking;
     this.rows = ['A','B','C','D','E','F'];
-    this.columns = [1,2,3,4,5,6,7,8,9,10];
+    this.columns = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20];
     // this.selected = false;
     this.selectedSeats = [];
     this.bookedSeats = undefined;

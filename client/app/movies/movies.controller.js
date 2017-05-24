@@ -7,6 +7,7 @@ class MoviesComponent {
     // this.message = 'Hello';
     this.$http = $http;
     this.socket = socket;
+    this.showMovies = false;
     // this.movieData = [];
   }
 
@@ -23,14 +24,15 @@ class MoviesComponent {
   }
 
   searchMovies(){
+    var key = '56aae9876c7f8f4d2706bd528d77e895';
     // this.getYear();
     console.log('hi');
-    this.$http.get(`https://api.themoviedb.org/3/search/movie?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&query=${this.search.title}`)
+    this.$http.get(`https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${this.search.title}`)
       .then(response => {
         var movieID = response.data.results[0].id;
-        console.log(movieID);
-        this.$http.get(`https://api.themoviedb.org/3/movie/${movieID}?api_key=15d2ea6d0dc1d476efbca3eba2b9bbfb&language=en-US`).then(response =>{
-          // this.getYear(response.data.releaseDate);
+        console.log(response.data.results);
+        this.$http.get(`https://api.themoviedb.org/3/movie/${movieID}?api_key=${key}&language=en-US`).then(response =>{
+          console.log(response.data);
           this.movieData = {
             Title: response.data.original_title,
             Year: response.data.release_date.substring(0,4),
@@ -40,6 +42,7 @@ class MoviesComponent {
             Backdrop:  `http://image.tmdb.org/t/p/w500/${response.data.backdrop_path}`,
             Runtime: `${response.data.runtime} minutes`
           };
+          this.showMovies = true;
           console.log(this.movieData);
         })
       });

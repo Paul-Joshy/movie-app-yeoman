@@ -29,7 +29,7 @@ class PaymentComponent {
     })
     .then(response =>{
       console.log(response);
-      this.$location.path('/confirmation');
+      this.$location.path('/receipt');
     });
   }
 

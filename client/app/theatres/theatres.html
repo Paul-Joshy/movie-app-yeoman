@@ -23,7 +23,7 @@
       <td><button type="button" class="btn btn submit" name="button" ng-click="theatresCtrl.addTheatre()">Add Theatre</button></td>
     </tr>
 
-    <tr ng-repeat="theatre in theatresCtrl.theatres">
+    <tr ng-repeat="theatre in theatresCtrl.theatres | filter: {city: theatresCtrl.theatre.city}">
       <td><input type="text" name="" class="table-inputs" value="{{theatre.name}}" ng-model="theatre.name" ng-click="enableUpdate = true" ng-blur="theatresCtrl.getTheatres(theatre)"></td>
       <td><input type="text" name="" class="table-inputs" value="{{theatre.location}}" ng-model="theatre.location" ng-click="enableUpdate = true" ng-blur="theatresCtrl.getTheatres(theatre)"></td>
       <td><input type="text" name="" class="table-inputs" value="{{theatre.seatCount}}" ng-model="theatre.seatCount" ng-click="enableUpdate = true" ng-blur="theatresCtrl.getTheatres(theatre)"></td>

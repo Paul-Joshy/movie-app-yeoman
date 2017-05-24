@@ -1,0 +1,21 @@
+<div class="container">
+  <h1>Receipt</h1>
+  <table class="table table-striped">
+    <tr>
+      <th>Movie Name</th>
+      <td>{{receiptCtrl.bookingService.movieDetails.name}}</td>
+    </tr>
+    <tr>
+      <th>Movie Theatre</th>
+      <td>{{receiptCtrl.bookingService.movieDetails.theatre}}</td>
+    </tr>
+    <tr>
+      <th>Total Amount</th>
+      <td>{{receiptCtrl.bookingService.movieDetails.grandTotal}}</td>
+    </tr>
+    <tr>
+      <th>Seats</th>
+      <td>{{ receiptCtrl.zip.join() }}</td>
+    </tr>
+  </table>
+</div>

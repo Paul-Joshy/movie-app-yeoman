@@ -4,7 +4,7 @@
 
   class MainController {
 
-    constructor($http, $scope, socket, booking, $location) {
+    constructor($http, $scope, socket, booking, $location){
       this.$http = $http;
       this.socket = socket;
       // this.movies = [];
@@ -24,35 +24,30 @@
     }
 
     $onInit() {
-      this.$http.get('/api/theatre-mappings/').then( response =>{
+      this.$http.get('/api/theatre-mappings/').then(response=>{
         this.mappings = response.data;
         console.log(this.mappings);
-
         this.movieNames = [];
         this.cities = [];
-
-        for(var mapping of this.mappings){
-          // console.log(mapping);
-          this.movieNames.push(mapping.movie);
-          this.cities.push(mapping.city);
-        }
-        this.movieNames =_.uniq(this.movieNames);
+        this.movieNames = _.uniq(_.pluck(this.mappings, 'movie'));
+        this.cities = _.uniq(_.pluck(this.mappings, 'city'));
+        // for(var mapping of this.mappings){
+        //   // console.log(mapping);
+        //   this.movieNames.push(mapping.movie);
+        //   this.cities.push(mapping.city);
+        // }
+        // this.movieNames =_.uniq(this.movieNames);
         this.cities =_.uniq(this.cities);
-        console.log(this.movieNames);
+        // console.log(this.movieNames);
         console.log(this.cities);
         this.$http.get('/api/movies').then( response =>{
           this.movies = response.data;
           console.log(this.movies)
-          this.movies = _.filter(this.movies, (movie)=>{ return _.find(this.movieNames, (title)=>{ return title === movie.Title }) } )
-          console.log(this.movies)
+          // this.movies = _.filter(this.movies, (movie)=>{ return movie.Title === _.find( _.uniq(_.pluck(this.mappings, 'movie')), (mapping)=>{ return mapping.movie === movie.Title } ) });
+          // this.movies = _.filter(this.movies, (movie)=>{ return _.find(this.movieNames, (title)=>{ return title === movie.Title }) } )
+          console.log(this.movies);
         })
-
-        $('#ratings').rateYo({
-          rating: 3.6
-        });
       });
-
-
     }
 
     filterMovies(city){
