@@ -4,11 +4,9 @@
 
 class MoviesComponent {
   constructor($http, $scope, socket) {
-    // this.message = 'Hello';
     this.$http = $http;
     this.socket = socket;
     this.showMovies = false;
-    // this.movieData = [];
   }
 
   $onInit() {
@@ -25,7 +23,6 @@ class MoviesComponent {
 
   searchMovies(){
     var key = '56aae9876c7f8f4d2706bd528d77e895';
-    // this.getYear();
     console.log('hi');
     this.$http.get(`https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${this.search.title}`)
       .then(response => {
@@ -49,29 +46,15 @@ class MoviesComponent {
   }
 
   addMovie() {
-    // console.log(this.movieData.Poster)
     this.$http.post('/api/movies', this.movieData);
     this.newMovie = '';
-
-      // this.$http.get('/api/movies').then(response => {
-      //   this.movies = response.data;
-      //   console.log(this.movies);
-      //   // this.socket.syncUpdates('thing', this.awesomeThings);
-      // });
   }
 
   deleteMovie(movie) {
-    // console.log('Work Bitch');
     this.$http.delete('/api/movies/' + movie._id).then(response => {
       console.log(response);
     });
 
-    // this.$http.get('/api/movies')
-    // .then(response => {
-    //   this.movies = response.data;
-    //   console.log(this.movies);
-    //   // this.socket.syncUpdates('thing', this.awesomeThings);
-    // });
   }
 }
 

@@ -9,7 +9,6 @@ function bookingService() {
   this.movieDetails.time = "";
   this.movieDetails.selectedSeats = [];
   this.movieDetails.grandTotal = "";
-  // this.backdrop = "";
   this.paymentDetails ={};
 }
 

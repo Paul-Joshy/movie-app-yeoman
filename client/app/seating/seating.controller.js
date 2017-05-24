@@ -78,6 +78,11 @@ class SeatingComponent {
     this.bookedSeats = this.movieDetails.bookedSeats;
     this.selectedSeats = [];
     this.$location.path('/payment');
+    // if(this.bookedSeats.length === 0){
+    // }
+    // else{
+    //   alert("Fill seats")
+    // }
   }
 }
 

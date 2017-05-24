@@ -7,19 +7,13 @@
     constructor($http, $scope, socket, booking, $location){
       this.$http = $http;
       this.socket = socket;
-      // this.movies = [];
-      // this.mappings = [];
       this.bookingService = booking;
       this.$location = $location;
       this.filteredMovies = [];
-      // this.movieNames = undefined;
-      // this.cities = undefined;
       this.query = {};
       this.showMovies = false;
       this.canRate = true;
       this.cnt = 0;
-      // this.query.city = undefined;
-
       $scope.$on('$destroy', function() {
         socket.unsyncUpdates('movies');
       });
@@ -33,22 +27,12 @@
         this.cities = [];
         this.movieNames = _.uniq(_.pluck(this.mappings, 'movie'));
         this.cities = _.uniq(_.pluck(this.mappings, 'city'));
-        // for(var mapping of this.mappings){
-        //   // console.log(mapping);
-        //   this.movieNames.push(mapping.movie);
-        //   this.cities.push(mapping.city);
-        // }
-        // this.movieNames =_.uniq(this.movieNames);
         this.cities =_.uniq(this.cities);
-        // console.log(this.movieNames);
         console.log(this.cities);
         this.$http.get('/api/movies').then( response =>{
           this.movies = response.data;
           console.log(this.movies)
-          // this.movies = _.filter(this.movies, (movie)=>{ return movie.Title === _.find( _.uniq(_.pluck(this.mappings, 'movie')), (mapping)=>{ return mapping.movie === movie.Title } ) });
-          // this.movies = _.filter(this.movies, (movie)=>{ return _.find(this.movieNames, (title)=>{ return title === movie.Title }) } )
           console.log(this.movies);
-          // this.rate();
         })
       });
     }

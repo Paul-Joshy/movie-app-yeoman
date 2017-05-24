@@ -26,13 +26,11 @@ class CitiesComponent {
         name:this.name
       }).then( ()=>{
       });
-      // location.reload();
     }
 
   deleteCity(city) {
     this.$http.delete('/api/cities/' + city._id).then(response => {
     });
-    // location.reload();
   }
 
   updateCity(city) {
@@ -42,7 +40,6 @@ class CitiesComponent {
     }).then(response =>{
       console.log(response);
     });
-    // console.log($(`#${city.name}Modal`));
     $('.modal-backdrop').hide();
   }
 
